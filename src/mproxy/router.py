@@ -14,7 +14,10 @@ llama_manager = LlamaCppManager()
 async def _get_port(path: str, body_str: str) -> int:
     body = json.loads(body_str)
     if path == "/v1/chat/completions":
-        model_info = await llama_manager.get_process(body["model"])
+        name = body["model"]
+        model_info = await llama_manager.get_process(name)
+        if not model_info:
+            raise ValueError(f"Model `{name}` not found")
         return model_info["port"]
     else:
         raise ValueError(f"`{path}` is not support yet")

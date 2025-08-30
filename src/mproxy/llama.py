@@ -19,14 +19,14 @@ class LlamaCppManager:
     def processes(self):
         return self._processes
 
-    async def get_process(self, name):
+    async def get_process(self, name) -> dict | None:
         if not name in self._processes:
             await self.swap(
                 name,
                 output_callback=lambda l: logger.info(l),
                 error_callback=lambda l: logger.info(l),
             )
-        return self._processes[name]
+        return self._processes.get(name)
 
     async def start(
         self,
@@ -91,7 +91,6 @@ class LlamaCppManager:
         await self._wait_for_server(port)
         self._processes[name]["pid"] = pid
         logger.info(f"Process `{name}` is ready on port {port}")
-        return pid
 
     async def _handle_stream(self, stream, callback: Callable):
         try:
