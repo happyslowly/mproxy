@@ -17,7 +17,7 @@ repo = "microsoft/DialoGPT-medium"
 "--gpu-layers" = 35
 
 # Run
-mproxy
+mproxy [--port PORT] # default port: 12345
 ```
 
 ## API
