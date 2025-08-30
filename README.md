@@ -9,10 +9,10 @@ Dynamic reverse proxy for llama.cpp with automatic model swapping.
 uv add mproxy
 
 # Configure ~/.config/mproxy/config.toml
-[models.gpt-3.5-turbo]
+[models.gpt-oss-20b]
 repo = "microsoft/DialoGPT-medium"
 
-[models.gpt-3.5-turbo.args]
+[models.gpt-oss-20b.args]
 "--ctx-size" = 4096
 "--gpu-layers" = 35
 
