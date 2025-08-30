@@ -1,0 +1,17 @@
+[project]
+name = "mproxy"
+version = "0.1.0"
+description = "Dynamic reverse proxy for llama.cpp servers with automatic model management"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "aiohttp>=3.12.15",
+    "loguru>=0.7.3",
+]
+
+[project.scripts]
+mproxy = "mproxy.app:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
