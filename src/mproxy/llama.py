@@ -34,7 +34,7 @@ class LlamaCppManager:
         output_callback: Callable | None = None,
         error_callback: Callable | None = None,
     ):
-        if not self._is_running(name):
+        if not self._is_running(name) and name in config.get("models", {}):
             await self._run(name, output_callback, error_callback)
 
     async def swap(
@@ -44,7 +44,7 @@ class LlamaCppManager:
         error_callback: Callable | None = None,
     ):
 
-        if not self._is_running(name):
+        if not self._is_running(name) and name in config.get("models", {}):
             await self.stop_all()
             await self._run(name, output_callback, error_callback)
 
