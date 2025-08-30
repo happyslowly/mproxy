@@ -1,9 +1,19 @@
+import argparse
+
 from aiohttp import web
 
 from mproxy.router import setup_routers
 
-if __name__ == "__main__":
-    app = web.Application()
 
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--port", type=int, default=12345, help="Port to listen on")
+    args = parser.parse_args()
+
+    app = web.Application()
     setup_routers(app)
-    web.run_app(app, host="localhost", port=12345)
+    web.run_app(app, host="localhost", port=args.port)
+
+
+if __name__ == "__main__":
+    main()
