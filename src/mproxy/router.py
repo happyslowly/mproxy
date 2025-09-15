@@ -13,7 +13,7 @@ llama_manager = LlamaCppManager()
 
 async def _get_port(path: str, body_str: str) -> int:
     body = json.loads(body_str)
-    if path == "/v1/chat/completions":
+    if path.startswith("/v1"):
         name = body["model"]
         model_info = await llama_manager.get_process(name)
         if not model_info:

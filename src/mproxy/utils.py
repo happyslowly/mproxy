@@ -13,7 +13,11 @@ def resolve_huggingface(repo: str, model_filename: str | None = None) -> Path:
         raise FileNotFoundError(f"Model `{repo}` not found in HuggingFace cache")
     if hash:
         model_folder = hf_root / model_folder_root / "snapshots" / hash
-        models = [f.name for f in model_folder.iterdir() if f.is_file()]
+        models = [
+            f.name
+            for f in model_folder.iterdir()
+            if f.is_file() and f.name.lower().endswith(".gguf")
+        ]
         if not model_filename:
             if len(models) == 1:
                 return model_folder / models[0]
